@@ -8,11 +8,12 @@
     <build>
         <plugins>
             <plugin>
+                <version>3.1</version>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -21,6 +22,7 @@
     <artifactId>base-hibernate-dao</artifactId>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.4.RELEASE</spring.version>
     </properties>
 
