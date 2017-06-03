@@ -3,10 +3,8 @@ package com.dannyzhou.base.dao.impl;
 import com.dannyzhou.base.dao.BaseDao;
 import com.dannyzhou.base.model.BaseModel;
 import com.dannyzhou.base.utils.Pagination;
-import org.aspectj.weaver.ClassAnnotationValue;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -47,10 +45,11 @@ public class BaseDaoImpl<ID extends Integer, ENTITY extends BaseModel> implement
 
     @Override
     public List<ENTITY> getListByPagination(Pagination pagination) {
-        Query query = currentSession().createQuery(currentSession().getCriteriaBuilder().createQuery())
-                .setFirstResult(pagination.getFirstResult())
-                .setMaxResults(pagination.getPageSize());
-
-        return query.list();
+//        Query query = currentSession().createQuery(currentSession().getCriteriaBuilder().createQuery())
+//                .setFirstResult(pagination.getFirstResult())
+//                .setMaxResults(pagination.getPageSize());
+//
+//        return query.list();
+        return null;
     }
 }
