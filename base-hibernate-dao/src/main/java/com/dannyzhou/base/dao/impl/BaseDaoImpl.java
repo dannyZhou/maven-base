@@ -7,7 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by danny on 1/7/17.
@@ -34,12 +36,16 @@ public class BaseDaoImpl<ID extends Integer, ENTITY extends BaseModel> implement
 
     @Override
     public ENTITY update(ENTITY entity) {
-        return null;
+        entity.setUpdateAt(new Date());
+        currentSession().update(entity);
+        return entity;
     }
 
     @Override
     public ENTITY create(ENTITY entity) {
-        currentSession().save(entity);
+        entity.setCreateAt(new Date());
+        ID id = (ID) currentSession().save(entity);
+        entity.setId(id);
         return entity;
     }
 

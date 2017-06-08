@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TooManyListenersException;
 
 /**
  * Created by danny on 2/25/17.
@@ -22,7 +21,7 @@ public class Pagination {
     private String sortType = "asc";
     private Map<String, Object> condition = new HashMap<>();
 
-    public Map<String, Object> setCondition (String key, Object value) {
+    public Map<String, Object> setCondition(String key, Object value) {
         condition.put(key, value);
         return condition;
     }
@@ -31,7 +30,7 @@ public class Pagination {
         if (totalCount == 0) {
             return 0;
         }
-        return new Long ((totalCount - 1) / pageSize + 1).intValue();
+        return new Long((totalCount - 1) / pageSize + 1).intValue();
     }
 
     public Object getCondition(String key) {

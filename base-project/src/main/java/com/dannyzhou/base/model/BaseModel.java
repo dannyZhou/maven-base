@@ -28,10 +28,4 @@ public class BaseModel implements Serializable {
 
     @Column(name = "create_at")
     private Date createAt;
-
-    @Column(name = "update_by")
-    private String updateBy;
-
-    @Column(name = "create_by")
-    private String createBy;
 }
