@@ -7,22 +7,28 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by danny on 1/7/17.
  */
 public class BaseDaoImpl<ID extends Integer, ENTITY extends BaseModel> implements BaseDao<ID, ENTITY> {
 
-    private ENTITY clazz;
+    private Class<ENTITY> clazz;
 
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
+    public BaseDaoImpl() {
+        this.clazz = (Class<ENTITY>) ((ParameterizedType) getClass()
+                .getGenericSuperclass()).getActualTypeArguments()[1];
+    }
+
     public ENTITY getOneById(ID id) {
-        return (ENTITY) new BaseModel();
+        return (ENTITY) currentSession().get(clazz, id);
     }
 
     protected Session currentSession() {
