@@ -17,27 +17,31 @@ import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.security.KeyStore;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by danny on 2017/6/9.
  */
-public class EnterprisePay {
+public class EnterprisePayService {
 
-    private EnterprisePay() {
+    private EnterprisePayService() {
     }
 
-    private static EnterprisePay enterprisePay = new EnterprisePay();
+    private static EnterprisePayService enterprisePayService = new EnterprisePayService();
 
-    public static EnterprisePay getInstance() {
-        return enterprisePay;
+    public static EnterprisePayService getInstance() {
+        return enterprisePayService;
     }
 
     /**
-     *
      * @param openId
      * @param money
      * @param internalOrderNumber
@@ -52,14 +56,14 @@ public class EnterprisePay {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 
-        transfers.setMch_appid(WechatConfig.APP_ID);// 自己的公众账号
-        transfers.setMchid(WechatConfig.MERCHANT_NUMBER);//自己的 商户号
+        transfers.setMch_appid(WechatConfig.getAppId());// 自己的公众账号
+        transfers.setMchid(WechatConfig.getMerchantNumber());//自己的 商户号
         transfers.setNonce_str(nonce);// 随机字符串
         transfers.setOpenid(openId);// 用户openId
         transfers.setCheck_name(WechatConfig.NO_CEHCK_USERNAME);// 校验用户姓名选项
         transfers.setAmount(money);// 付款金额
         transfers.setDesc(description);// 企业付款描述信息
-        transfers.setSpbill_create_ip(WechatConfig.SOURCE_IP);// 调用接口的机器Ip地址
+        transfers.setSpbill_create_ip(WechatConfig.getSourceIp());// 调用接口的机器Ip地址
         transfers.setPartner_trade_no(internalOrderNumber);// 商户订单号
         String sign = createSendRedPackOrderSign(transfers);
         transfers.setSign(sign);// 签名
@@ -88,7 +92,7 @@ public class EnterprisePay {
         sign.append("&amount=").append(transfers.getAmount());
         sign.append("&desc=").append(transfers.getDesc());
         sign.append("&spbill_create_ip=").append(transfers.getSpbill_create_ip());
-        sign.append("&key=").append(WechatConfig.PARTNER_KEY);
+        sign.append("&key=").append(WechatConfig.getPartnerKey());
 
         return DigestUtils.md5Hex(sign.toString()).toUpperCase();
     }
@@ -97,11 +101,11 @@ public class EnterprisePay {
         StringBuilder message = new StringBuilder();
         try {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(WechatConfig.CERT_LOCATION);
-            keyStore.load(inputStream, WechatConfig.PARTNER_ID.toCharArray());
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(WechatConfig.getCertLocation());
+            keyStore.load(inputStream, WechatConfig.getPartnerId().toCharArray());
             // Trust own CA and all self-signed certs
             SSLContext sslcontext = SSLContexts.custom()
-                    .loadKeyMaterial(keyStore, WechatConfig.PARTNER_ID.toCharArray())
+                    .loadKeyMaterial(keyStore, WechatConfig.getPartnerId().toCharArray())
                     .build();
             // Allow TLSv1 protocol only
             SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
