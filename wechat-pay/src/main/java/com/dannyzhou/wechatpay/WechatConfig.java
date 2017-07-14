@@ -10,7 +10,7 @@ public class WechatConfig {
     private static final String PREFIX = "wechat.";
 
     private static final String APP_ID = PREFIX + "appId";
-    private static final String MERCHANT_NUMBER = PREFIX + "merchantNumber";
+    private static final String MERCHANT_ID = PREFIX + "merchantId";
     private static final String SOURCE_IP = PREFIX + "sourceIp";
     private static final String PARTNER_ID = PREFIX + "partnerId";
     private static final String PARTNER_KEY = PREFIX + "partnerKey";
@@ -30,8 +30,8 @@ public class WechatConfig {
         return getProperty(APP_ID);
     }
 
-    public static String getMerchantNumber() {
-        return getProperty(MERCHANT_NUMBER);
+    public static String getMerchantId() {
+        return getProperty(MERCHANT_ID);
     }
 
     public static String getSourceIp() {

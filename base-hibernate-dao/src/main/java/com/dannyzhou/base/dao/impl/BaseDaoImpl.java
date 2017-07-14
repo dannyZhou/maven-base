@@ -64,4 +64,10 @@ public class BaseDaoImpl<ID extends Integer, ENTITY extends BaseModel> implement
 //        return query.list();
         return null;
     }
+
+    @Override
+    public void flushAndClear() {
+        currentSession().flush();
+        currentSession().clear();
+    }
 }

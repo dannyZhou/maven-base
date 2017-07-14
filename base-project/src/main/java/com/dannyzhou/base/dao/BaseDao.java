@@ -19,4 +19,6 @@ public interface BaseDao<ID extends Integer, ENTITY extends BaseModel> {
     ENTITY create(ENTITY entity);
 
     List<ENTITY> getListByPagination(Pagination pagination);
+
+    void flushAndClear();
 }

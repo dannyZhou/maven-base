@@ -1,5 +1,6 @@
 package com.dannyzhou.wechatpay.utils;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -16,7 +17,7 @@ public class OrderUtils {
         StringBuilder builder = new StringBuilder();
         builder.append(System.currentTimeMillis());
         builder.append("0000");
-        builder.append(random.nextInt());
+        builder.append(Math.abs(random.nextInt()));
 
         return builder.toString();
     }

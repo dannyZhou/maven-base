@@ -57,7 +57,7 @@ public class EnterprisePayService {
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 
         transfers.setMch_appid(WechatConfig.getAppId());// 自己的公众账号
-        transfers.setMchid(WechatConfig.getMerchantNumber());//自己的 商户号
+        transfers.setMchid(WechatConfig.getMerchantId());//自己的 商户号
         transfers.setNonce_str(nonce);// 随机字符串
         transfers.setOpenid(openId);// 用户openId
         transfers.setCheck_name(WechatConfig.NO_CEHCK_USERNAME);// 校验用户姓名选项
@@ -83,14 +83,14 @@ public class EnterprisePayService {
     private String createSendRedPackOrderSign(Transfer transfers) {
 
         StringBuffer sign = new StringBuffer();
-        sign.append("mch_appid=").append(transfers.getMch_appid());
+        sign.append("amount=").append(transfers.getAmount());
+        sign.append("&check_name=").append(transfers.getCheck_name());
+        sign.append("&desc=").append(transfers.getDesc());
+        sign.append("&mch_appid=").append(transfers.getMch_appid());
         sign.append("&mchid=").append(transfers.getMchid());
         sign.append("&nonce_str=").append(transfers.getNonce_str());
-        sign.append("&partner_trade_no=").append(transfers.getPartner_trade_no());
         sign.append("&openid=").append(transfers.getOpenid());
-        sign.append("&check_name=").append(transfers.getCheck_name());
-        sign.append("&amount=").append(transfers.getAmount());
-        sign.append("&desc=").append(transfers.getDesc());
+        sign.append("&partner_trade_no=").append(transfers.getPartner_trade_no());
         sign.append("&spbill_create_ip=").append(transfers.getSpbill_create_ip());
         sign.append("&key=").append(WechatConfig.getPartnerKey());
 
