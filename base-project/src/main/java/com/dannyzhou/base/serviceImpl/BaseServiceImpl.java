@@ -14,7 +14,7 @@ public abstract class BaseServiceImpl<ID extends Integer, ENTITY extends BaseMod
 
     protected BaseDao<ID, ENTITY> baseDao;
 
-    public abstract void setBaseDao(BaseDao baseDao);
+    public abstract void setBaseDao(BaseDao<ID, ENTITY> baseDao);
 
     @Override
     public ENTITY getOneById(ID id) {

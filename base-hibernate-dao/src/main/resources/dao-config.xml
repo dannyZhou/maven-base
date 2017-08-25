@@ -13,7 +13,7 @@
           destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl"
-                  value="jdbc:mysql://127.0.0.1:3306/red_packets?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true"/>
+                  value="jdbc:mysql://127.0.0.1:3306/verify_system?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;transformedBitIsBoolean=true"/>
         <property name="user" value="redPackets"/>
         <property name="password" value="redPackets"/>
     </bean>
@@ -35,13 +35,9 @@
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
-        <property name="packagesToScan">
-            <list>
-                <value>com.dannyzhou.*.model</value>
-            </list>
-        </property>
+        <property name="packagesToScan" value="com.dannyzhou.*.model" />
     </bean>
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven/>
 
     <aop:config>
         <aop:pointcut expression="execution(* com.dannyzhou.*.service..*.*(..))"
@@ -49,7 +45,7 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:advice id="txAdvice">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
