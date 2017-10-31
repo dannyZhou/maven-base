@@ -2,9 +2,13 @@ package com.dannyzhou.base.utils;
 
 import com.google.gson.Gson;
 import lombok.Getter;
+import lombok.Setter;
 
+/**
+ * Created by danny on 2017/6/5.
+ */
 @Getter
-public class ResponseObject {
+public class EncryptedResponseObject {
 
     // Result status code.
     // 200 is right.
@@ -15,14 +19,17 @@ public class ResponseObject {
     // Result Object.
     private Object responseObject;
 
-    public ResponseObject(Object responseObject) {
+    public EncryptedResponseObject(Object responseObject) {
 
         this.status = 200;
-
+        if (!(responseObject instanceof String)) {
+            responseObject = new Gson().toJson(responseObject);
+        }
+        responseObject = EncryptUtils.encrypt(responseObject.toString());
         this.responseObject = responseObject;
     }
 
-    public ResponseObject(Integer status, String errorMessage) {
+    public EncryptedResponseObject(Integer status, String errorMessage) {
         this.status = status;
         this.errorMessage = errorMessage;
     }

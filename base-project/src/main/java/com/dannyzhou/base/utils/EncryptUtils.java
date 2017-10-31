@@ -25,6 +25,11 @@ public class EncryptUtils {
         return Base64.encodeBase64String(bytes);
     }
 
+    public static String encrypt(String origin) {
+        String internal = simpleEncrypt(origin);
+        return simpleEncrypt(internal);
+    }
+
     public static String simpleDecrypt(String origin) {
 
         byte[] bytes = Base64.decodeBase64(origin);
