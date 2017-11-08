@@ -18,12 +18,6 @@ public class EncryptUtils {
         }
     }
 
-    public static String encrypt(String origin)
-    {
-        String internal = simpleEncrypt(origin);
-        return simpleEncrypt(internal);
-    }
-
     public static String simpleEncrypt(String origin) {
         byte[] bytes = origin.getBytes();
 
