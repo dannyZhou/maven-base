@@ -2,7 +2,6 @@ package com.dannyzhou.base.utils;
 
 import com.google.gson.Gson;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by danny on 2017/6/5.

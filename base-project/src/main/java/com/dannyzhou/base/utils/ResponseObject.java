@@ -1,6 +1,5 @@
 package com.dannyzhou.base.utils;
 
-import com.google.gson.Gson;
 import lombok.Getter;
 
 @Getter

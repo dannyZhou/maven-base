@@ -13,6 +13,7 @@ public class GetPropertyException extends RuntimeException {
     public GetPropertyException(String error) {
         super(error);
     }
+
     public GetPropertyException(IOException ex) {
         super(ex);
     }

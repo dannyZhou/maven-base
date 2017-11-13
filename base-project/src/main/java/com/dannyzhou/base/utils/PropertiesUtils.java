@@ -12,12 +12,11 @@ import java.util.Properties;
  */
 public class PropertiesUtils {
 
+    private static final String CONFIG_FILE = "commonConfig.properties";
+    private static PropertiesUtils propertiesUtils = new PropertiesUtils();
+
     private PropertiesUtils() {
     }
-
-    private static final String CONFIG_FILE = "commonConfig.properties";
-
-    private static PropertiesUtils propertiesUtils = new PropertiesUtils();
 
     public static PropertiesUtils getInstance() {
         return propertiesUtils;

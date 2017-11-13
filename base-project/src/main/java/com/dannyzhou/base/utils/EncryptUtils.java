@@ -39,9 +39,9 @@ public class EncryptUtils {
 
     private static byte[] reverseByte(byte[] bytes) {
 
-        for (int i = 0; i< bytes.length; i++) {
+        for (int i = 0; i < bytes.length; i++) {
             byte originByte = bytes[i];
-            if (originByte>=0) {
+            if (originByte >= 0) {
                 bytes[i] = (byte) (originByte - 128);
             } else {
                 bytes[i] = (byte) (originByte + 128);
